@@ -2,9 +2,11 @@
 'use strict';
 
 // Implementation of game logic
-const secretNumber = Math.trunc(Math.random() * 20) + 1;
-document.querySelector('.number').textContent = secretNumber;
+let secretNumber = Math.trunc(Math.random() * 20) + 1;
+document.querySelector('.number').textContent = '?';
 let score = 20;
+
+// Impleemntation of the "CHECK" button
 
 document.querySelector('.check').addEventListener('click', function () {
   const guess = document.querySelector('.guess').value;
@@ -33,5 +35,22 @@ document.querySelector('.check').addEventListener('click', function () {
     }
   } else if (guess == secretNumber) {
     document.querySelector('.message').textContent = '✨YOU WON🧨';
+    document.querySelector('.number').textContent = secretNumber;
+    document.querySelector('.number').style.width = '30rem';
+    document.querySelector('body').style.backgroundColor = '#60b347';
   }
+});
+
+// Implementation to the "AGAIN" button
+
+document.querySelector('.again').addEventListener('click', function () {
+  score = 20;
+  secretNumber = Math.trunc(Math.random() * 20) + 1;
+
+  document.querySelector('.score').textContent = score;
+  document.querySelector('.number').textContent = '?';
+  document.querySelector('.message').textContent = 'Start guessing...';
+  document.querySelector('.guess').value = ' ';
+  document.querySelector('.number').style.width = '15rem';
+  document.querySelector('body').style.backgroundColor = '#222';
 });
