@@ -5,6 +5,7 @@
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
 document.querySelector('.number').textContent = '?';
 let score = 20;
+let highScore = 0;
 
 // Impleemntation of the "CHECK" button
 
@@ -24,7 +25,7 @@ document.querySelector('.check').addEventListener('click', function () {
       document.querySelector('.message').textContent = '💩You lost';
     }
   }
-  // when the input is too small
+  // When the input is too small
   else if (guess < secretNumber) {
     if (score > 1) {
       document.querySelector('.message').textContent = '🤷‍♂️ Too low!!';
@@ -33,11 +34,18 @@ document.querySelector('.check').addEventListener('click', function () {
     } else {
       document.querySelector('.message').textContent = '💩You lost';
     }
-  } else if (guess == secretNumber) {
+  }
+  // When the input is correct
+  else if (guess == secretNumber) {
     document.querySelector('.message').textContent = '✨YOU WON🧨';
     document.querySelector('.number').textContent = secretNumber;
     document.querySelector('.number').style.width = '30rem';
     document.querySelector('body').style.backgroundColor = '#60b347';
+
+    if (score > highScore) {
+      highScore = score;
+      document.querySelector('.highscore').textContent = highScore;
+    }
   }
 });
 
