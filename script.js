@@ -2,19 +2,32 @@
 'use strict';
 
 // Implementation of game logic
-const number = Math.trunc(Math.random() * 20) + 1;
-document.querySelector('.number').textContent = number;
+const secretNumber = Math.trunc(Math.random() * 20) + 1;
+document.querySelector('.number').textContent = secretNumber;
+let score = 20;
 
 document.querySelector('.check').addEventListener('click', function () {
   const guess = document.querySelector('.guess').value;
   // When there is no input
   if (!guess) {
     document.querySelector('.message').textContent = '⛔ No number!';
-  } else if (guess > number) {
-    document.querySelector('.message').textContent = '😖 Too high!';
-  } else if (guess < number) {
-    document.querySelector('.message').textContent = '🤷‍♂️ Too low!!';
-  } else if (guess == number) {
+  } else if (guess > secretNumber) {
+    if (score > 1) {
+      document.querySelector('.message').textContent = '😖 Too high!';
+      score--;
+      document.querySelector('.score').textContent = score;
+    } else {
+      document.querySelector('.message').textContent = '💩You lost';
+    }
+  } else if (guess < secretNumber) {
+    if (score > 1) {
+      document.querySelector('.message').textContent = '🤷‍♂️ Too low!!';
+      score--;
+      document.querySelector('.score').textContent = score;
+    } else {
+      document.querySelector('.message').textContent = '💩You lost';
+    }
+  } else if (guess == secretNumber) {
     document.querySelector('.message').textContent = '✨YOU WON🧨';
   }
 });
